@@ -69,8 +69,8 @@ public class Main {
         System.out.println(i.get());
 
         // print hashset
-        for(Integer i: s10) {
-            System.out.println(i);
+        for(Integer i1: s10) {
+            System.out.println(i1);
         }
 
     }
