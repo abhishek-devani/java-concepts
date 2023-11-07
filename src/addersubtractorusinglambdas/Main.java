@@ -1,24 +1,42 @@
-package addersubtractor;
+package addersubtractorusinglambdas;
 
-import polymorphism.A;
-
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
+import java.util.concurrent.*;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class Main {
     public static void main(String[] args) throws ExecutionException, InterruptedException {
 
         Value v = new Value();
-        Adder adder = new Adder(v);
-        Subtractor subtractor = new Subtractor(v);
+        Lock l = new ReentrantLock();
 
         ExecutorService es = Executors.newCachedThreadPool();
 
-        Future<Void> adderFuture = es.submit(adder);
+        Callable<Void> adderLambda = () -> {
 
-        Future<Void> subtractorFuture = es.submit(subtractor);
+            for (int i = 1; i <= 10000; i++) {
+                l.lock();
+                v.value += i;
+                l.unlock();
+            }
+            return null;
+
+        };
+
+        Callable<Void> subtractorLambda = () -> {
+
+            for (int i = 1; i <= 10000; i++) {
+                l.lock();
+                v.value -= i;
+                l.unlock();
+            }
+            return null;
+
+        };
+
+        Future<Void> adderFuture = es.submit(adderLambda);
+
+        Future<Void> subtractorFuture = es.submit(subtractorLambda);
 
         adderFuture.get();
         subtractorFuture.get();

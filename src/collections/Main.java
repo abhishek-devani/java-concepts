@@ -63,6 +63,10 @@ public class Main {
 //        students.add(student2);
 //        students.add(student3);
 
+//        Default Order of Compare
+        Collections.sort(students);
+
+//        Order by PSP
         Collections.sort(students, new StudentComparatorByPSP());
 
         for(Student student: students) {

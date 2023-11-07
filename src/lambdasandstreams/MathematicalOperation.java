@@ -1,2 +1,7 @@
-package lambdasandstreams;public interface MathematicalOperation {
+package lambdasandstreams;
+
+public interface MathematicalOperation {
+
+    Integer operate(Integer a, Integer b);
+
 }
