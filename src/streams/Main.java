@@ -68,6 +68,16 @@ public class Main {
 
         System.out.println(i.get());
 
+        // print sum of all the elements
+        int n = l10.stream()
+                        .reduce(0,
+                                (curr_sum, ele) -> {
+                                    return curr_sum + ele;
+                                }
+                        );
+
+        System.out.println(n);
+
         // print hashset
         for(Integer i1: s10) {
             System.out.println(i1);
